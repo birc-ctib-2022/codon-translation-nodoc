@@ -1,3 +1,4 @@
+[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=8380188&assignment_repo_type=AssignmentRepo)
 # Translating protein-coding genes
 
 *Protein-coding genes* are genes that cells first translate into RNA, then translate the RNA into amino acids, and finally use the amino acids as proteins that do whatever it is that proteins do.

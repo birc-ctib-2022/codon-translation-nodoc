@@ -18,12 +18,12 @@ CODON_MAP = {'TTT': 'F', 'TTC': 'F', 'TTA': 'L', 'TTG': 'L',
              'GGT': 'G', 'GGC': 'G', 'GGA': 'G', 'GGG': 'G'}
 
 
-def split_codons(dna: str) -> list[str] | None:
+def split_codons(dna):
     """Split a DNA string into a list of triplets.
-
+    
     If the length of the string is a multiple of tree, then this
     function splits the string into non-overlapping triplets.
-
+    
     >>> split_codons('aaacccgggttt')
     ['aaa', 'ccc', 'ggg', 'ttt']
 
@@ -35,11 +35,20 @@ def split_codons(dna: str) -> list[str] | None:
     True
 
     """
-    # FIXME: Implement the function
-    return []
+    dna = dna.strip()
+
+    if len(dna)%3 != 0:
+        output = None
+
+    if len(dna)%3 == 0:
+        output = []
+        for i in range(0,len(dna), 3):
+            output.append(dna[i:i+3])
+      
+    return output
 
 
-def translate_codons(codons: list[str]) -> list[str]:
+def translate_codons(codons_list):
     """Translate a list of codons (triplets) into their corresponding
     amino acid sequence.
 
@@ -60,15 +69,25 @@ def translate_codons(codons: list[str]) -> list[str]:
     True
 
     """
-    # FIXME: Implement the function
-    return []
 
+    amino_list = []
+    
+    for codon in codons_list:
+        if codon.upper() not in CODON_MAP.keys():
+            amino_list = None
+            break
+        amino = CODON_MAP[codon.upper()]
+        amino_list.append(amino)
+    
+    return amino_list
+#print(translate_codons(["acg", "ac", "gca"]))
 
-def translate_dna(dna: str) -> str:
+def translate_dna(dna):
     """Translate a DNA string into its corresponding amino acid string.
 
     >>> translate_dna('TGTTGCTGA')
     'CC*'
+
     >>> translate_dna('tgttgctga')
     'CC*'
 
@@ -80,5 +99,11 @@ def translate_dna(dna: str) -> str:
     True
 
     """
-    # FIXME: Implement the function
-    return ""
+    codons = split_codons(dna)
+    if codons != None:
+        amino_seq = ''.join(translate_codons(codons))
+    else:
+        amino_seq = None
+
+    return amino_seq
+

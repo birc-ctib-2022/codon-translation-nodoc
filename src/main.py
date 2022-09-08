@@ -80,20 +80,15 @@ from codons import translate_dna
 # when you use a file as a program, but not if you import
 # the file for use as a module.
 if __name__ == '__main__':
-
     inFile, outFile = sys.stdin, sys.stdout
-
     if len(sys.argv) == 1:
         pass
-
-    if len(sys.argv) == 2:
+    elif len(sys.argv) == 2:
         inFile = open(sys.argv[1], 'r')
-
-    if len(sys.argv) == 3:
+    elif len(sys.argv) == 3:
         inFile = open(sys.argv[1], 'r')
         outFile = open(sys.argv[2],'w')
-
-    if len(sys.argv) > 3:
+    else:
         print("Too many arguments.", file=sys.stderr)
         sys.exit(1)
 
@@ -104,7 +99,7 @@ if __name__ == '__main__':
         if amino_seq is None:
             print(f"Could not translate '{line}'.", file=sys.stderr)
             sys.exit(1)
-        print(aa, file=outFile)
+        print(amino_seq, file=outFile)
 
     inFile.close()
     outFile.close()

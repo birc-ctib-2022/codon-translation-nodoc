@@ -102,7 +102,7 @@ def translate_dna(dna):
 
     """
     codons = split_codons(dna)
-    if codons != None:
+    if translate_codons(codons) != None:
         amino_seq = ''.join(translate_codons(codons))
     else:
         amino_seq = None

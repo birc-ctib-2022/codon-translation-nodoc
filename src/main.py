@@ -80,22 +80,34 @@ from codons import translate_dna
 # when you use a file as a program, but not if you import
 # the file for use as a module.
 if __name__ == '__main__':
+
     if len(sys.argv) > 3 or len(sys.argv) < 2:
         sys.exit(1)
-    if len(sys.argv) in [2,3]:
-        inFile = sys.argv[1]
-    if len(sys.argv) == 3:
-        outFile = open(sys.argv[2],'w')
-    
 
-    with open(inFile,'r') as file:
-            lines = file.readlines() #lines()
+    if len(sys.argv) == 3:
+        inFile = open(sys.argv[1], 'r')
+        outFile = open(sys.argv[2],'w')
+
+    if len(sys.argv) == 2:
+        if sys.stdin.isatty() == False:  # False if stdin is connected.
+            inFile = sys.stdin
+            outFile = open(sys.argv[1],'w')
+        else:
+            inFile = open(sys.argv[1], 'r')
+            outFile = None
+
+    lines = inFile.readlines() #lines()
 
     seq = ''
     for line in lines:
         seq += line
     outlines = translate_dna(seq)
 
-    output_file.write(outlines)
-    output_file.close()
+    if outFile != None:
+        outFile.write(outlines)
+        outFile.close()
+
+
+# f1_lines = open(sys.argv[1]).readlines()
+# f2_lines = (sys.stdin if len(sys.argv) < 3 else open(sys.argv[2])).readlines()
 

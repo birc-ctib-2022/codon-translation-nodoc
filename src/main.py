@@ -81,7 +81,7 @@ from codons import translate_dna
 # the file for use as a module.
 if __name__ == '__main__':
 
-    if len(sys) == 1:
+    if len(sys.argv) == 1:
         if sys.stdin.isatty() == False:  # False if sys.stdin is connected
             inFile = sys.stdin
             outFile = None

@@ -81,29 +81,41 @@ from codons import translate_dna
 # the file for use as a module.
 if __name__ == '__main__':
 
-    if len(sys.argv) > 3 or len(sys.argv) < 2:
-        sys.exit(1)
-
-    if len(sys.argv) == 3:
-        inFile = open(sys.argv[1], 'r')
-        outFile = open(sys.argv[2],'w')
+    if len(sys) == 1:
+        if sys.stdin.isatty() == False:  # False if sys.stdin is connected
+            inFile = sys.stdin
+            outFile = None
+        else:
+            sys.exit(1)
 
     if len(sys.argv) == 2:
         inFile = open(sys.argv[1], 'r')
         outFile = None
 
-    lines = inFile.readlines() #lines()
+    #if len(sys.argv) == 2:
+    #    if sys.stdin.isatty() == False:
+    #        inFile = sys.stdin
+    #        outFile = None
+    #    else:
+    #        inFile = open(sys.argv[1], 'r')
+    #        outFile = None
 
+
+    if len(sys.argv) == 3:
+        inFile = open(sys.argv[1], 'r')
+        outFile = open(sys.argv[2],'w')
+
+    if len(sys.argv) > 3:
+        sys.exit(1)
+
+
+    lines = inFile.readlines() #lines()
     seq = ''
     for line in lines:
         seq += line
     outlines = translate_dna(seq)
 
+
     if outFile != None:
         outFile.write(outlines)
         outFile.close()
-
-
-# f1_lines = open(sys.argv[1]).readlines()
-# f2_lines = (sys.stdin if len(sys.argv) < 3 else open(sys.argv[2])).readlines()
-

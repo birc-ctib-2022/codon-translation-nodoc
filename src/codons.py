@@ -116,3 +116,6 @@ def translate_dna(dna):
     return amino_seq
 
 #######################################################
+
+import sys
+print(sys.argv)

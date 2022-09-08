@@ -80,36 +80,22 @@ from codons import translate_dna
 # when you use a file as a program, but not if you import
 # the file for use as a module.
 if __name__ == '__main__':
-    infile, outfile = sys.stdin, sys.stdout
-    match len(sys.argv):
-        case 1:
-            pass
-        case 2:
-            infile = open(sys.argv[1],'r').readlines()
-        case 3:
-            infile = open(sys.argv[1],'r').readlines()
-            outfile = open(sys.argv[2],'w')
-        case _:
-            # more than two arguments; that is an error
-            print("Too many arguments.", file=sys.stderr)
-            sys.exit(1)
+    if len(sys.argv) > 3 or len(sys.argv) < 2:
+        sys.exit(1)
+    if len(sys.argv) in [2,3]:
+        inFile = sys.argv[1]
+    if len(sys.argv) == 3:
+        outFile = open(sys.argv[2],'w')
+    
 
-    # Process the input, one line at a time.
-    for line in infile:
-        # Remove the newline from `line`; we don't want to try to
-        # translate that.
-        line = line.strip()
-        aa = translate_dna(line)
-        if aa is None:
-            # Something went wrong!
-            print(f"Could not translate '{line}'.", file=sys.stderr)
-            sys.exit(1)
-        # If everthing went well, we write the result to the output
-        print(aa, file=outfile)
+    with open(inFile,'r') as file:
+            lines = file.readlines() #lines()
 
-    # It is polite to close files when we no longer need them.
-    # It doesn't matter here because we are just about to terminate
-    # the entire program, but it is best to get into the habit
-    # so we don't forget later, where it might matter more.
-    infile.close()
-    outfile.close()
+    seq = ''
+    for line in lines:
+        seq += line
+    outlines = translate_dna(seq)
+
+    output_file.write(outlines)
+    output_file.close()
+

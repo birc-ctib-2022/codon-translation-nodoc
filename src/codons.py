@@ -110,25 +110,3 @@ def translate_dna(dna):
     return amino_seq
 
 #######################################################
-# Setup as cmd tool:
-
-if len(sys.argv) in [2,3]:
-    inFile = sys.argv[1]
-if len(sys.argv) == 3:
-    outFile = sys.argv[2]
-    output_file = open(outFile,'w')
-if len(sys.argv) > 3 or len(sys.argv) < 2:
-    sys.exit(1)
-
-with open(inFile,'r') as file:
-        lines = file.readlines() #lines()
-
-seq = ''
-for line in lines:
-    seq += line
-outlines = translate_dna(seq)
-
-output_file.write(outlines)
-output_file.close()
-
-#######################################################

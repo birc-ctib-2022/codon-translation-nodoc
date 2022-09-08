@@ -89,12 +89,8 @@ if __name__ == '__main__':
         outFile = open(sys.argv[2],'w')
 
     if len(sys.argv) == 2:
-        if sys.stdin.isatty() == False:  # False if stdin is connected.
-            inFile = sys.stdin
-            outFile = open(sys.argv[1],'w')
-        else:
-            inFile = open(sys.argv[1], 'r')
-            outFile = None
+        inFile = open(sys.argv[1], 'r')
+        outFile = None
 
     lines = inFile.readlines() #lines()
 

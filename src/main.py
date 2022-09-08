@@ -83,16 +83,12 @@ if __name__ == '__main__':
     infile, outfile = sys.stdin, sys.stdout
     match len(sys.argv):
         case 1:
-            # zero arguments
             pass
         case 2:
-            # one argument
-            print("Feature not implemented yet.", file=sys.stderr)
-            sys.exit(1)
+            infile = open(sys.argv[1],'r').readlines()
         case 3:
-            # two arguments
-            print("Feature not implemented yet.", file=sys.stderr)
-            sys.exit(1)
+            infile = open(sys.argv[1],'r').readlines()
+            outfile = open(sys.argv[2],'w')
         case _:
             # more than two arguments; that is an error
             print("Too many arguments.", file=sys.stderr)

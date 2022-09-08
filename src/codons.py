@@ -117,7 +117,7 @@ if len(sys.argv) in [2,3]:
 if len(sys.argv) == 3:
     outFile = sys.argv[2]
     output_file = open(outFile,'w')
-if len(sys.argv) > 3:
+if len(sys.argv) > 3 or len(sys.argv) < 2:
     sys.exit(1)
 
 with open(inFile,'r') as file:

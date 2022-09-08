@@ -81,28 +81,17 @@ from codons import translate_dna
 # the file for use as a module.
 if __name__ == '__main__':
 
-    if len(sys.argv) == 1:
-        inFile = sys.stdin
-        outFile = sys.stdout
+    inFile, outFile = sys.stdin, sys.stdout
 
     if len(sys.argv) == 2:
         inFile = open(sys.argv[1], 'r')
-        outFile = None
-
-    #if len(sys.argv) == 2:
-    #    if sys.stdin.isatty() == False:  # False if sys.stdin is connected
-    #        inFile = sys.stdin
-    #        outFile = None
-    #    else:
-    #        inFile = open(sys.argv[1], 'r')
-    #        outFile = None
-
 
     if len(sys.argv) == 3:
         inFile = open(sys.argv[1], 'r')
         outFile = open(sys.argv[2],'w')
 
     if len(sys.argv) > 3:
+        print("Too many arguments.", file=sys.stderr)
         sys.exit(1)
 
 
@@ -113,6 +102,14 @@ if __name__ == '__main__':
     outlines = translate_dna(seq)
 
 
-    if outFile != None:
-        outFile.write(outlines)
-        outFile.close()
+    for line in inFile:
+        line = line.strip()
+        amino_seq = translate_dna(line)
+        if amino_seq is None:
+            print(f"Could not translate '{line}'.", file=sys.stderr)
+            sys.exit(1)
+        print(aa, file=outFile)
+
+    inFile.close()
+    outFile.close()
+

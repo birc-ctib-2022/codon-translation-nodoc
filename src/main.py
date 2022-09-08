@@ -83,6 +83,9 @@ if __name__ == '__main__':
 
     inFile, outFile = sys.stdin, sys.stdout
 
+    if len(sys.argv) == 1:
+        pass
+
     if len(sys.argv) == 2:
         inFile = open(sys.argv[1], 'r')
 
@@ -93,13 +96,6 @@ if __name__ == '__main__':
     if len(sys.argv) > 3:
         print("Too many arguments.", file=sys.stderr)
         sys.exit(1)
-
-
-    lines = inFile.readlines() #lines()
-    seq = ''
-    for line in lines:
-        seq += line
-    outlines = translate_dna(seq)
 
 
     for line in inFile:

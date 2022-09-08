@@ -80,40 +80,27 @@ from codons import translate_dna
 # when you use a file as a program, but not if you import
 # the file for use as a module.
 if __name__ == '__main__':
-    infile, outfile = sys.stdin, sys.stdout
-    match len(sys.argv):
-        case 1:
-            # zero arguments
-            pass
-        case 2:
-            # one argument
-            print("Feature not implemented yet.", file=sys.stderr)
-            sys.exit(1)
-        case 3:
-            # two arguments
-            print("Feature not implemented yet.", file=sys.stderr)
-            sys.exit(1)
-        case _:
-            # more than two arguments; that is an error
-            print("Too many arguments.", file=sys.stderr)
-            sys.exit(1)
+    inFile, outFile = sys.stdin, sys.stdout
+    if len(sys.argv) == 1:
+        pass
+    elif len(sys.argv) == 2:
+        inFile = open(sys.argv[1], 'r')
+    elif len(sys.argv) == 3:
+        inFile = open(sys.argv[1], 'r')
+        outFile = open(sys.argv[2],'w')
+    else:
+        print("Too many arguments.", file=sys.stderr)
+        sys.exit(1)
 
-    # Process the input, one line at a time.
-    for line in infile:
-        # Remove the newline from `line`; we don't want to try to
-        # translate that.
+
+    for line in inFile:
         line = line.strip()
-        aa = translate_dna(line)
-        if aa is None:
-            # Something went wrong!
+        amino_seq = translate_dna(line)
+        if amino_seq is None:
             print(f"Could not translate '{line}'.", file=sys.stderr)
             sys.exit(1)
-        # If everthing went well, we write the result to the output
-        print(aa, file=outfile)
+        print(amino_seq, file=outFile)
 
-    # It is polite to close files when we no longer need them.
-    # It doesn't matter here because we are just about to terminate
-    # the entire program, but it is best to get into the habit
-    # so we don't forget later, where it might matter more.
-    infile.close()
-    outfile.close()
+    inFile.close()
+    outFile.close()
+

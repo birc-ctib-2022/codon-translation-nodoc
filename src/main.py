@@ -82,18 +82,15 @@ from codons import translate_dna
 if __name__ == '__main__':
 
     if len(sys.argv) == 1:
-        if sys.stdin.isatty() == False:  # False if sys.stdin is connected
-            inFile = sys.stdin
-            outFile = None
-        else:
-            sys.exit(1)
+        inFile = sys.stdin
+        outFile = sys.stdout
 
     if len(sys.argv) == 2:
         inFile = open(sys.argv[1], 'r')
         outFile = None
 
     #if len(sys.argv) == 2:
-    #    if sys.stdin.isatty() == False:
+    #    if sys.stdin.isatty() == False:  # False if sys.stdin is connected
     #        inFile = sys.stdin
     #        outFile = None
     #    else:
